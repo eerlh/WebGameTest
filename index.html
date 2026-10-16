@@ -38,7 +38,7 @@
       companyName:'NeonRoute',productName:'霓虹航线',productVersion:'1.0',devicePixelRatio:Math.min(window.devicePixelRatio||1,1.5),
       showBanner:(message,type)=>{if(type==='error')fail('运行遇到问题，请刷新页面或使用新版浏览器。');console[type==='error'?'error':'warn'](message);}
     },progress=>{const percent=Math.max(0,Math.min(100,Math.round(progress*100)));document.getElementById('bar').style.width=percent+'%';document.querySelector('.track').setAttribute('aria-valuenow',percent);})
-    .then(value=>{instance=value;document.getElementById('loading').style.display='none';canvas.focus();})
+    .then(value=>{instance=value;document.getElementById('loading').style.display='none';requestAnimationFrame(()=>instance.SendMessage('NeonRoute','BrowserReady',''));canvas.focus();})
     .catch(error=>{console.error(error);fail('无法启动，请使用支持 WebGL 2 的新版浏览器并重试。');});
     document.body.appendChild(script);
     document.addEventListener('visibilitychange',()=>{if(document.hidden&&instance)instance.SendMessage('NeonRoute','BrowserHidden','');});
